@@ -16,7 +16,7 @@ const logger = {
     const emoji = options.emoji || 'ℹ️  ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.green('INFO'); 
-    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[ ${chalk.gray(timestamp)} ] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   },
   warn: (msg, options = {}) => {
@@ -24,7 +24,7 @@ const logger = {
     const emoji = options.emoji || '⚠️ ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.yellow('WARN');
-    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[ ${chalk.gray(timestamp)} ] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   },
   error: (msg, options = {}) => {
@@ -32,7 +32,7 @@ const logger = {
     const emoji = options.emoji || '❌ ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.red('ERROR');
-    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[ ${chalk.gray(timestamp)} ] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   },
   debug: (msg, options = {}) => {
@@ -40,7 +40,7 @@ const logger = {
     const emoji = options.emoji || '🔍  ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.blue('DEBUG');
-    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[ ${chalk.gray(timestamp)} ] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   }
 };
@@ -487,7 +487,7 @@ let globalUseProxy = false;
 let globalProxies = [];
 
 async function initializeConfig() {
-  const useProxyAns = await askQuestion(chalk.cyanBright('🔌 Use proxy? (y/n): '));
+  const useProxyAns = await askQuestion(chalk.cyanBright('🔌 Dp You Want Use Proxy? (y/n): '));
   if (useProxyAns.trim().toLowerCase() === 'y') {
     globalUseProxy = true;
     globalProxies = await readProxies();
@@ -534,6 +534,7 @@ async function run() {
   });
   console.log(gradient.retro(centerText('=== Telegram Channel 🚀 : NT Exhaust (@NTExhaust) ===', terminalWidth)));
   console.log(gradient.retro(centerText('✪ AUTO COMPLETE DAILY & SOCIAL TASKS ✪', terminalWidth)));
+  console.log('\n');
   await initializeConfig();
 
   while (true) {
