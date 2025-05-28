@@ -16,7 +16,7 @@ const logger = {
     const emoji = options.emoji || 'ℹ️  ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.green('INFO'); 
-    const formattedMsg = `${chalk.gray(timestamp)} ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   },
   warn: (msg, options = {}) => {
@@ -24,7 +24,7 @@ const logger = {
     const emoji = options.emoji || '⚠️ ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.yellow('WARN');
-    const formattedMsg = `${chalk.gray(timestamp)} ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   },
   error: (msg, options = {}) => {
@@ -32,7 +32,7 @@ const logger = {
     const emoji = options.emoji || '❌ ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.red('ERROR');
-    const formattedMsg = `${chalk.gray(timestamp)} ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   },
   debug: (msg, options = {}) => {
@@ -40,7 +40,7 @@ const logger = {
     const emoji = options.emoji || '🔍  ';
     const context = options.context ? `[${options.context}] ` : '';
     const level = chalk.blue('DEBUG');
-    const formattedMsg = `${chalk.gray(timestamp)} ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
+    const formattedMsg = `[${chalk.gray(timestamp)}] ${emoji}${level} ${chalk.white(context.padEnd(20))}${chalk.white(msg)}`;
     console.log(formattedMsg);
   }
 };
@@ -90,7 +90,7 @@ async function formatTaskTable(tasks, context) {
     const status = task.status === 'completed' ? chalk.greenBright('Complte') : chalk.yellowBright('Pending');
     return `| ${displayName.padEnd(20)} | ${((task.category || 'N/A') + '     ').slice(0, 8)} | ${((task.points || 0).toString() + '    ').slice(0, 5)} | ${status.padEnd(6)} |`;
   }).join('\n');
-  const footer = chalk.cyanBright('+----------------------+----------+-------+----------+');
+  const footer = chalk.cyanBright('+----------------------+----------+-------+---------+');
 
   console.log(header + '\n' + rows + '\n' + footer);
   console.log('\n');
@@ -469,7 +469,7 @@ async function processAccount(token, index, total, proxy = null) {
   printInfo('Total AST', stats.totalAst, context);
   printInfo('Followers', stats.followers, context);
 
-  logger.info(`Completed account processing`, { emoji: '🎉 ', context });
+  logger.info(chalk.bold.greenBright(`Completed account processing`, { emoji: '🎉 ', context }));
 }
 
 async function askQuestion(query) {
@@ -538,7 +538,7 @@ async function run() {
 
   while (true) {
     await runCycle();
-    logger.info('Cycle completed. Waiting 24 hours...', { emoji: '🔄 ' });
+    logger.info(chalk.bold.yellowBright('Cycle completed. Waiting 24 hours...', { emoji: '🔄 ' }));
     await delay(86400);
   }
 }
