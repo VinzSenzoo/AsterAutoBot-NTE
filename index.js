@@ -365,7 +365,7 @@ async function fetchStatistics(token, proxy, context) {
 
 async function processAccount(token, index, total, proxy = null) {
   const context = `Account ${index + 1}/${total}`;
-  logger.info(`Starting account processing`, { emoji: '🚀 ', context });
+  logger.info(chalk.bold.magentaBright(`Starting account processing`), { emoji: '🚀 ', context });
 
   printHeader(`Account Info ${context}`);
   const userInfo = await fetchUserInfo(token, proxy, context);
@@ -469,7 +469,7 @@ async function processAccount(token, index, total, proxy = null) {
   printInfo('Total AST', stats.totalAst, context);
   printInfo('Followers', stats.followers, context);
 
-  logger.info(chalk.bold.greenBright(`Completed account processing`, { emoji: '🎉 ', context }));
+  logger.info(chalk.bold.greenBright(`Completed account processing`), { emoji: '🎉 ', context });
 }
 
 async function askQuestion(query) {
@@ -539,7 +539,7 @@ async function run() {
 
   while (true) {
     await runCycle();
-    logger.info(chalk.bold.yellowBright('Cycle completed. Waiting 24 hours...', { emoji: '🔄 ' }));
+    logger.info(chalk.bold.yellowBright('Cycle completed. Waiting 24 hours...'), { emoji: '🔄 ' });
     await delay(86400);
   }
 }
